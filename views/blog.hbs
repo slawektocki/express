@@ -1,0 +1,20 @@
+<main>
+    {{#if _id}}
+        {{>single_post}}
+    {{else}} 
+        <h1>Blog</h1>
+
+        {{#each posts}}
+
+            {{#if isPublic}}
+                <div class="post">
+                    <h2>{{title}}</h2>
+                    <p>{{content}}</p>
+                    <a href="/blog/{{_id}}">Read more...</a>
+                </div>
+            {{/if}}
+        {{/each}}
+
+        <a href="/blog/post/add">Add post</a>
+    {{/if}}
+</main>
