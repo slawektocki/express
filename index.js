@@ -3,16 +3,28 @@ const app = express();
 
 const hbs = require('express-handlebars');
 
+const blogRouter = require('./app/routes/blogRouter');
+
 app.use(express.urlencoded({ extended: true }))
 app.use( express.static('public'));
 
 app.engine('hbs', hbs({defaultLayout: 'main', extname: '.hbs'}));
 app.set('view engine', 'hbs');
 
+//const Post = require('./app/models/Post');
+//const post = require('./app/controllers/post.controller');
 
-const Post = require('./app/models/Post');
+/* Routes */
+app.use('/blog', blogRouter);
 
-const post = require('./app/controllers/post.controller')
+app.get('/mongoose', function(req, res){
+    
+    Post.find().lean().exec(function(err, posts) {
+        console.log(posts);
+    });
+
+    res.send('done');
+});
 
 app.get('/', function(req, res){
     res.render('home', {
@@ -23,6 +35,8 @@ app.get('/', function(req, res){
 
 });
 
+
+/*
 app.get('/blog', function(req, res){
     post.list(function(err, posts){
         if(err) res.send(err);
@@ -30,22 +44,19 @@ app.get('/blog', function(req, res){
     });
 });
 
-
 app.get('/blog/:id', function(req, res){
    
-    post.get(req.params.id, function(err, post){
+   post.get(req.params.id, function(err, data_post){
         if(err) res.send(err);
 
-        res.render('blog', post);
+        res.render('blog', data_post);
+        console.log(data_post);
     })
 });
-
-
 
 app.get('/blog/post/add', function(req, res){
     res.render('add_post');
 });
-
 
 app.post('/blog/post/add', function(req, res){
 
@@ -85,7 +96,7 @@ app.get('/blog/post/delete/:id', function(req, res){
     });
     
 });
-
+*/
 
 app.listen(8080, function(){
     console.log('Serwer Node.js działa');

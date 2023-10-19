@@ -8,13 +8,13 @@
 
             {{#if isPublic}}
                 <div class="post">
-                    <h2>{{title}}</h2>
-                    <p>{{content}}</p>
+                    <h2>Post: {{title}}</h2>
+                    <p>Content: {{content}}</p>
                     <a href="/blog/{{_id}}">Read more...</a>
                 </div>
             {{/if}}
         {{/each}}
-
-        <a href="/blog/post/add">Add post</a>
+        <br>
+        <a href="/blog/post/add"><h2>Add Post</h2></a>
     {{/if}}
 </main>

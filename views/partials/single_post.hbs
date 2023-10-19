@@ -1,8 +1,13 @@
 <article>
-    <h2>{{title}}</h2>
-    <p>{{content}}</p>
-    <p>{{created_at}}</p>
+
+    <h1>Treść posta</h1>
+    <h2>id: {{_id}}</h2>
+    <h2>is Public: {{isPublic}}</h2>
+    <h2>Title: {{title}}</h2>
+    <h2>Content: {{content}}</h2>
+    <h2>Created: {{created_at}}</h2>
 
     <a href="/blog/post/update/{{_id}}">Update post</a>
+    <br>
     <a href="/blog/post/delete/{{_id}}">Delete</a>
 </article>

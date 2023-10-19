@@ -1,6 +1,6 @@
 const Post = require('../models/Post');
 
-
+//znajdz wszystkie posty 
 function postList(cb) {
     Post.find().lean().exec(function(err, posts) {
         if(err) {
@@ -13,11 +13,11 @@ function postList(cb) {
 
 
 function postGet(id, cb) {
-    Post.findById(id).exec(function(err, post) {
+    Post.findById(id).exec(function(err, data) {
         if(err) {
             cb(err)
         } else {
-            cb(null, post)
+            cb(null, data)
         }
     })
 }
