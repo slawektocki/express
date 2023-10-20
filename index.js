@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-
+require('dotenv').config();
 const hbs = require('express-handlebars');
 
 const blogRouter = require('./app/routes/blogRouter');
@@ -87,6 +87,7 @@ app.get('/blog/post/delete/:id', function(req, res){
 });
 */
 
-app.listen(8080, function(){
+
+app.listen(process.env.PORT, function(){
     console.log('Serwer Node.js działa');
 });
