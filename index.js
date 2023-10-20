@@ -4,6 +4,9 @@ const app = express();
 const hbs = require('express-handlebars');
 
 const blogRouter = require('./app/routes/blogRouter');
+const postApiRouter = require('./app/api/postApi');
+
+app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }))
 app.use( express.static('public'));
@@ -15,25 +18,11 @@ app.set('view engine', 'hbs');
 //const post = require('./app/controllers/post.controller');
 
 /* Routes */
-app.use('/blog', blogRouter);
+app.use('/blog',blogRouter);
 
-app.get('/mongoose', function(req, res){
-    
-    Post.find().lean().exec(function(err, posts) {
-        console.log(posts);
-    });
+/* Api routes */
+app.use('/api/post', postApiRouter);
 
-    res.send('done');
-});
-
-app.get('/', function(req, res){
-    res.render('home', {
-        title: 'Tytuł z Express',
-        content: 'Cześć programisto'
-    });
- 
-
-});
 
 
 /*

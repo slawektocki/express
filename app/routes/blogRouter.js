@@ -8,6 +8,7 @@ router.get('/', function(req, res){
     post.list(function(err, posts){
         if(err) res.send(err);
         res.render('blog', {posts});
+        
     });
 });
 
