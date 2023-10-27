@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
  
 const post = require('../controllers/post.controller');
+const auth = require("../middlewares/auth");
 
 router.get('/all', function(req, res){
     post.list(function(err, posts){
@@ -31,7 +32,7 @@ router.get('/:id', function(req, res){
     });
 });
 
-router.post('/add', function(req, res){
+router.post('/add', auth, function(req, res){
 
     post.add(req.body, function(err, post){
         if(err) {

@@ -1,65 +1,53 @@
 const Post = require('../models/Post');
 
-//znajdz wszystkie posty 
-function postList(cb) {
-    Post.find().lean().exec(function(err, posts) {
-        if(err) {
-            cb(err)
-        } else {
-            cb(null, posts)
-        }
-    });
+async function postList(cb) {
+    try{
+        const posts = await Post.find().lean().exec();
+        cb(null, posts);
+    }
+    catch(err){
+        cb(err);
+    }
 }
 
-
-function postGet(id, cb) {
-    Post.findById(id).exec(function(err, data) {
-        if(err) {
-            cb(err)
-        } else {
-            cb(null, data)
-        }
-    })
+async function postGet(id, cb) {
+    try{
+        const data = await Post.findById(id).exec(); 
+        cb(null, data);
+    }catch(err) {
+        cb(err)
+    }
 }
 
-
-function postAdd(data, cb) {
-    let newPost = new Post(data);
-
-    newPost.save(function(err, post) {
-
-        if(err) {
+async function postAdd(data, cb) {
+    try{
+        let newPost = new Post(data);
+        await newPost.save();
+        cb (null, newPost);
+    }catch (err)
+        { 
             cb(err);
-        } else {
-            cb(null, post);
         }
-
-    });
 }
 
-
-function postUpdate(id, data, cb) {
-    Post.updateOne({_id: id}, data, function(err, post) {
-
-        if(err) {
-            cb(err);
-        } else {
-            cb(null, post);
-        }
-
-    });
+async function postUpdate(id, data, cb) {
+    try{
+        const post = await Post.updateOne({_id: id}, data);
+        cb(null, post);
+    } catch(err) {
+        cb(err);
+    }
 }
 
-
-function postDelete(id, cb) {
-    Post.deleteOne({_id: id},function (err, post) {
-        if (err) {
-            cb(err);
-        } else {
-            cb(null, post);
-        }
-    });
+async function postDelete(id, cb) {
+    try{
+        await Post.deleteOne({_id: id});
+        cb(null);
+    } catch(err){
+        cb(err);
+    }
 }
+
 
 module.exports = {
     list: postList,

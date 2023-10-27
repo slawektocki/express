@@ -47,7 +47,7 @@ router.get('/post/update/:id', function(req, res){
 
 router.post('/post/update/:id', function(req, res){
     
-    post.update(req.params.id, req.body, function(err, post){
+    post.update(req.params.id, req.body, function(err){
         if(err) res.send(err);
 
         res.redirect('/blog');
@@ -57,7 +57,7 @@ router.post('/post/update/:id', function(req, res){
 
 router.get('/post/delete/:id', function(req, res){
     
-    post.delete(req.params.id, function(err, post){
+    post.delete(req.params.id, function(err){
         if(err) res.send(err);
 
         res.redirect('/blog');
